@@ -1,0 +1,574 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Mitr:wght@300;400;500&display=swap');
+
+:root {
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --secondary: #f8f9fc;
+    --text-dark: #1e293b;
+    --text-light: #64748b;
+    --success: #10b981;
+    --error: #ef4444;
+    --border: #e2e8f0;
+    --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --gradient-1: linear-gradient(135deg, #a78bfa 0%, #4f46e5 100%);
+    --gradient-2: linear-gradient(225deg, #c4b5fd 0%, #a78bfa 100%);
+    --gradient-3: linear-gradient(90deg, var(--primary), #a78bfa);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background: var(--gradient-1);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--text-dark);
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    animation: float 15s ease-in-out infinite;
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 400px;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: 0;
+    animation: float 20s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(30px, 20px) rotate(5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    width: 90%;
+    max-width: 580px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(0);
+    transition: all 0.5s ease;
+    animation: fadeIn 0.8s ease forwards;
+    z-index: 1;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.15), 0 15px 15px -5px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: var(--gradient-2);
+    border-radius: 0 0 0 200px;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+.container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    background: var(--gradient-2);
+    border-radius: 0 150px 0 0;
+    z-index: 0;
+    opacity: 0.4;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    font-size: 2.2rem;
+    opacity: 0;
+    animation: titleIn 1s ease 0.3s forwards;
+}
+
+@keyframes titleIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--gradient-3);
+    border-radius: 4px;
+}
+
+.form-group {
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.4s; }
+.form-group:nth-child(2) { animation-delay: 0.6s; }
+.form-group:nth-child(3) { animation-delay: 0.8s; }
+.form-group:nth-child(4) { animation-delay: 1s; }
+.form-group:nth-child(5) { animation-delay: 1.2s; }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    transform-origin: left;
+}
+
+.form-group:focus-within label {
+    color: var(--primary);
+    transform: scale(1.02);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: 'Prompt', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--secondary);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+input:hover, select:hover, textarea:hover {
+    border-color: #cbd5e1;
+    background-color: #fff;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+    background-color: #fff;
+    transform: translateY(-2px);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+button {
+    background: var(--gradient-3);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    font-family: 'Prompt', sans-serif;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 1.4s forwards;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+}
+
+button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: -1;
+    transition: width 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+}
+
+button:hover:before {
+    width: 100%;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+.message-types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease 1s forwards;
+}
+
+.message-type {
+    background-color: var(--secondary);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 18px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Prompt', sans-serif;
+    color: var(--text-dark);
+    font-weight: 500;
+    flex: 1 1 calc(50% - 15px);
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.message-type:hover {
+    background-color: rgba(79, 70, 229, 0.08);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.message-type.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+}
+
+.success-message {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+    padding: 18px;
+    border-radius: 12px;
+    margin-top: 1.8rem;
+    display: none;
+    border-left: 5px solid var(--success);
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(16, 185, 129, 0.15);
+    transform: translateY(10px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.success-message.show {
+    display: block;
+    animation: fadeUp 0.5s ease forwards;
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    margin-top: 1.8rem;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.loading.show {
+    display: block;
+    animation: fadeUp 0.5s ease forwards;
+}
+
+.loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 5px solid rgba(79, 70, 229, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.typed-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 24px;
+    background-color: var(--primary);
+    margin-left: 2px;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.typing-text {
+    display: inline-block;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 2rem;
+        width: 95%;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .message-type {
+        flex: 1 1 100%;
+    }
+    
+    input, select, textarea, button {
+        padding: 13px 16px;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+}
+/* เพิ่ม CSS นี้ต่อจาก CSS เดิม */
+
+/* เอฟเฟกต์ไฟรุ้งสำหรับตัวอักษร */
+@keyframes rainbow-fire {
+    0% { color: #ff0000; text-shadow: 0 0 5px #ff0000, 0 -5px 10px #ff8800; }
+    14% { color: #ff8800; text-shadow: 0 0 5px #ff8800, 0 -5px 10px #ffff00; }
+    28% { color: #ffff00; text-shadow: 0 0 5px #ffff00, 0 -5px 10px #00ff00; }
+    42% { color: #00ff00; text-shadow: 0 0 5px #00ff00, 0 -5px 10px #00ffff; }
+    56% { color: #00ffff; text-shadow: 0 0 5px #00ffff, 0 -5px 10px #0000ff; }
+    70% { color: #0000ff; text-shadow: 0 0 5px #0000ff, 0 -5px 10px #ff00ff; }
+    84% { color: #ff00ff; text-shadow: 0 0 5px #ff00ff, 0 -5px 10px #ff0000; }
+    100% { color: #ff0000; text-shadow: 0 0 5px #ff0000, 0 -5px 10px #ff8800; }
+}
+
+@keyframes flame-flicker {
+    0%, 100% { transform: translateY(0) scale(1); }
+    25% { transform: translateY(-2px) scale(1.05); }
+    50% { transform: translateY(-1px) scale(0.95); }
+    75% { transform: translateY(-3px) scale(1.02); }
+}
+
+.fire-char {
+    display: inline-block;
+    animation: rainbow-fire 5s infinite, flame-flicker 0.5s ease-in-out infinite alternate;
+    transform-origin: bottom center;
+    position: relative;
+}
+
+.fire-char::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, rgba(255, 165, 0, 0.3), transparent);
+    z-index: -1;
+    filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.fire-char.active::after {
+    opacity: 1;
+}
+
+h1 .fire-char {
+    font-weight: 700;
+}
+
+label .fire-char {
+    font-weight: 600;
+}
+
+.typing-text {
+    display: inline-block;
+    perspective: 1000px;
+}
+
+.fire-char:nth-child(5n+1) { animation-delay: 0s, 0.1s; }
+.fire-char:nth-child(5n+2) { animation-delay: 0.5s, 0.2s; }
+.fire-char:nth-child(5n+3) { animation-delay: 1s, 0.3s; }
+.fire-char:nth-child(5n+4) { animation-delay: 1.5s, 0.4s; }
+.fire-char:nth-child(5n+5) { animation-delay: 2s, 0.5s; }
+
+/* ปรับแต่งเคอร์เซอร์เพื่อให้เข้ากับเอฟเฟกต์ไฟ */
+.typed-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 24px;
+    background: linear-gradient(to top, #ff0000, #ffff00, #ffffff);
+    margin-left: 2px;
+    animation: cursor-fire 1s infinite;
+    border-radius: 2px;
+    box-shadow: 0 0 8px #ff8800, 0 0 12px #ff0000;
+}
+
+@keyframes cursor-fire {
+    0%, 100% { opacity: 1; height: 24px; transform: translateY(0); }
+    50% { opacity: 0.5; height: 20px; transform: translateY(2px); }
+}
+
+/* เพิ่มลูกเล่นสำหรับหน้าฟอร์ม */
+.container {
+    background-color: rgba(20, 20, 35, 0.85);
+    backdrop-filter: blur(10px);
+    color: #f0f0f0;
+}
+
+body {
+    background: linear-gradient(135deg, #131342 0%, #3b0f3b 50%, #2d0a0a 100%);
+}
+
+h1 {
+    color: #f0f0f0;
+}
+
+h1::after {
+    background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
+}
+
+input, select, textarea {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #f0f0f0;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #a78bfa;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.3);
+}
+
+label {
+    color: #d1d5db;
+}
+
+.form-group:focus-within label {
+    color: #a78bfa;
+}
+
+.message-type {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #f0f0f0;
+}
+
+.message-type:hover {
+    background-color: rgba(167, 139, 250, 0.2);
+    border-color: #a78bfa;
+}
+
+.message-type.active {
+    background: linear-gradient(45deg, #5046e5, #a78bfa);
+    border-color: #a78bfa;
+}
+
+button {
+    background: linear-gradient(45deg, #5046e5, #a78bfa);
+    box-shadow: 0 4px 14px rgba(80, 70, 229, 0.5);
+}
+
+button:hover {
+    box-shadow: 0 6px 20px rgba(167, 139, 250, 0.6);
+}
+
+/* ปรับแต่งเพิ่มเติมเพื่อให้ธีมเข้ากับเอฟเฟกต์ไฟรุ้ง */
+.container::before {
+    background: linear-gradient(225deg, rgba(167, 139, 250, 0.5), rgba(80, 70, 229, 0.5));
+    opacity: 0.5;
+}
+
+.container::after {
+    background: linear-gradient(45deg, rgba(255, 0, 0, 0.3), rgba(255, 136, 0, 0.3));
+    opacity: 0.3;
+}
+
+/* เพิ่มพาร์ติเคิลไฟลอยขึ้น */
+@keyframes float-up {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-50px) scale(0); opacity: 0; }
+}
+
+.fire-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffcc00, #ff4500);
+    box-shadow: 0 0 10px #ff8800, 0 0 20px #ff0000;
+    animation: float-up 2s ease-out forwards;
+    z-index: 2;
+    pointer-events: none;
+}
