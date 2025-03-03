@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/friend.css">
+    <title>FRIENDSHIP</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- ใช้ jQuery สำหรับ AJAX -->
+    <script src="static/friend.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>MEMORY FRIENDSHIP</h1>
+            
+            <form id="messageForm">
+                <div class="form-group">
+                    <label for="name">ชื่อของคุณ</label>
+                    <input type="text" id="name" name="name" required placeholder="กรุณาใส่ชื่อของคุณ">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">ข้อความถึงนัท</label>
+                    <textarea id="message" name="message" required placeholder="พิมพ์ข้อความของคุณที่นี่"></textarea>
+                </div>
+                
+                <button type="submit">ส่งข้อความ</button>
+            </form>
+            
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>กำลังส่งข้อความ...</p>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                ส่งข้อความเรียบร้อยแล้ว! ขอบคุณที่ส่งข้อความถึงนัทนะขอบคุณครับ
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            // เมื่อส่งฟอร์ม
+            $("#messageForm").submit(function(event){
+                event.preventDefault();  // ป้องกันการโหลดหน้าใหม่
+
+                // ดึงข้อมูลจากฟอร์ม
+                var name = $("#name").val();
+                var message = $("#message").val();
+
+                // ส่งข้อมูลไปยังเซิร์ฟเวอร์ผ่าน AJAX
+                $.ajax({
+                    url: "/Friend",  // URL ของ Flask ที่รับข้อมูล
+                    type: "POST",
+                    data: {
+                        name: name,
+                        message: message
+                    },
+                    success: function(response) {
+                        // ถ้าข้อมูลส่งสำเร็จ
+                        $("#responseMessage").html("<p>ส่งข้อความเรียบร้อยแล้ว!</p>");
+                        $("#successMessage").show();  // แสดงข้อความสำเร็จ
+                    },
+                    error: function(xhr, status, error) {
+                        // ถ้ามีข้อผิดพลาด
+                        $("#responseMessage").html("<p>เกิดข้อผิดพลาดในการส่งข้อความ</p>");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
